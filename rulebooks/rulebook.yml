@@ -16,5 +16,4 @@
         run_playbook:
           name: playbooks/on_tag_created.yml
           inventory:
-            hosts:
-              localhost:
+            hosts: localhost
