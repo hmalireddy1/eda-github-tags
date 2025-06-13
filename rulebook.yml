@@ -1,12 +1,17 @@
-- name: GitHub Tag Watcher
+- name: GitHub Tag Rulebook
   hosts: localhost
   sources:
-    - ansible.eda.webhook:
-        port: 5005
+    - ansible.eda.github:
+        token: "{{ credential.token }}"
+        repositories:
+          - owner: hmalireddy1
+            repo: eda-github-tags
+        event_types:
+          - create
 
   rules:
-    - name: trigger on tag push
-      condition: event.payload.ref.startswith('refs/tags/')
+    - name: tag creation rule
+      condition: event.payload.ref_type == "tag"
       action:
         run_playbook:
           name: playbooks/on_tag_created.yml
