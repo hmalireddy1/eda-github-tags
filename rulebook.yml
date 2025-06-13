@@ -1,0 +1,12 @@
+- name: GitHub Tag Watcher
+  hosts: localhost
+  sources:
+    - ansible.eda.webhook:
+        port: 5005
+
+  rules:
+    - name: trigger on tag push
+      condition: event.payload.ref.startswith('refs/tags/')
+      action:
+        run_playbook:
+          name: playbooks/on_tag_created.yml
