@@ -1,0 +1,8 @@
+---
+- name: Respond to GitHub tag creation
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Print tag push detected
+      debug:
+        msg: "A new GitHub tag was pushed — automation triggered!"
