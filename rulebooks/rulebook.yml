@@ -13,7 +13,5 @@
     - name: tag creation rule
       condition: event.payload.ref_type == "tag"
       action:
-        run_playbook:
-          name: playbooks/on_tag_created.yml
-          inventory:
-            hosts: localhost
+        run_job_template:
+          name: tag_created
