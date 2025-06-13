@@ -1,14 +1,16 @@
 ---
-sources:
-  - name: github-tag-webhook
-    ansible.eda.webhook:
-      port: 5000
-      token: 8c218a021b6a4de2a906a301005709259c9991bb76c3809b142c7830f644dd93
+- name: Listen for events on a webhook
+  hosts: localhost
+  sources:
+    - name: github-tag-webhook
+      ansible.eda.webhook:
+        port: 5000
+        token: 8c218a021b6a4de2a906a301005709259c9991bb76c3809b142c7830f644dd93
 
-rules:
-  - name: trigger-job-on-tag
-    condition: event.payload.ref startswith "refs/tags/"
-    action:
-      run_job_template:
-        name: "tag_created"
-        organization: "Private Cloud Projects"
+  rules:
+    - name: trigger-job-on-tag
+      condition: event.payload.ref startswith "refs/tags/"
+      action:
+        run_job_template:
+          name: "tag_created"
+          organization: "Private Cloud Projects"
