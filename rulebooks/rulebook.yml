@@ -9,7 +9,7 @@
 
   rules:
     - name: trigger-job-on-tag
-      condition: event.payload.ref is match("^refs/tags/")
+      condition: event.payload.ref_type == "tag"
       action:
         run_job_template:
           name: "tag_created"
